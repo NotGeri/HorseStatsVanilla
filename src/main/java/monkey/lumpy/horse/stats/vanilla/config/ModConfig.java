@@ -14,17 +14,19 @@ public class ModConfig implements ConfigData {
             this.green = green;
             this.blue = blue;
         }
-        @ConfigEntry.BoundedDiscrete(max=255)
+
+        @ConfigEntry.BoundedDiscrete(max = 255)
         int red;
-        @ConfigEntry.BoundedDiscrete(max=255)
+        @ConfigEntry.BoundedDiscrete(max = 255)
         int green;
-        @ConfigEntry.BoundedDiscrete(max=255)
+        @ConfigEntry.BoundedDiscrete(max = 255)
         int blue;
 
         Color getColor() {
-            return Color.ofRGB(red,green,blue);
+            return Color.ofRGB(red, green, blue);
         }
     }
+
     @ConfigEntry.Gui.Tooltip
     private boolean useColors = true;
     @ConfigEntry.Gui.Tooltip
@@ -57,13 +59,13 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     private float badStrengthValue = 6;
 
-    
+
     @ConfigEntry.Gui.CollapsibleObject
-    private ColorObj goodColor = new ColorObj(0,180,0);
+    private ColorObj goodColor = new ColorObj(0, 180, 0);
     @ConfigEntry.Gui.CollapsibleObject
-    private ColorObj neutralColor = new ColorObj(70,70,70);
+    private ColorObj neutralColor = new ColorObj(70, 70, 70);
     @ConfigEntry.Gui.CollapsibleObject
-    private ColorObj badColor = new ColorObj(255,0,0);
+    private ColorObj badColor = new ColorObj(255, 0, 0);
 
     public boolean useColors() {
         return useColors;
@@ -76,7 +78,7 @@ public class ModConfig implements ConfigData {
     public boolean isTooltipEnabled() {
         return enableTooltip;
     }
-    
+
     public float getGoodHorseJumpValue() {
         return goodHorseJumpValue;
     }
