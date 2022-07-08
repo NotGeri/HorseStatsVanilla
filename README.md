@@ -9,8 +9,8 @@ A Minecraft mod that displays the statistics (health, speed, jump height) of hor
 
 ---
 
-![img](https://i.geri.dev/zFNeH5fMRKpW.gif)
+![img](docs/gui.gif)
 
 Additionally, with this fork, a small message is printed each time a young horse is discovered: 
 
-![img](https://i.geri.dev/igkewuFtIDa5.gif)
+![img](docs/message.gif)
