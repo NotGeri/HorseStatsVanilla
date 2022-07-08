@@ -41,7 +41,7 @@ public abstract class HorseScreenMixin extends HandledScreen<HorseScreenHandler>
         boolean hasChest = AbstractDonkeyEntity.class.isAssignableFrom(this.entity.getClass()) && ((AbstractDonkeyEntity) this.entity).hasChest();
 
         DecimalFormat df = new DecimalFormat("#.#");
-        String jumpstrength = df.format(Converter.jumpStrengthToJumpHeight(this.entity.getJumpStrength()));
+        String jumpStrength = df.format(Converter.jumpStrengthToJumpHeight(this.entity.getJumpStrength()));
         String maxHealth = df.format(this.entity.getMaxHealth());
         String speed = df.format(Converter.genericSpeedToBlocPerSec(this.entity.getAttributes().getValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)));
 
@@ -50,7 +50,7 @@ public abstract class HorseScreenMixin extends HandledScreen<HorseScreenHandler>
         Color speedColor = config.getNeutralColor();
         Color hearthColor = config.getNeutralColor();
         if (config.useColors()) {
-            double jumpValue = new BigDecimal(jumpstrength.replace(',', '.')).doubleValue();
+            double jumpValue = new BigDecimal(jumpStrength.replace(',', '.')).doubleValue();
             double speedValue = new BigDecimal(speed.replace(',', '.')).doubleValue();
             double healthValue = new BigDecimal(maxHealth.replace(',', '.')).doubleValue();
 
@@ -88,13 +88,13 @@ public abstract class HorseScreenMixin extends HandledScreen<HorseScreenHandler>
             this.textRenderer.draw(matrices, "" + speed, 93.0F + spacer, 26.0F, speedColor.hashCode());
 
             this.textRenderer.draw(matrices, "⇮", 84.0F + spacer, 36.0F, jumpColor.hashCode());
-            this.textRenderer.draw(matrices, "" + jumpstrength, 93.0F + spacer, 36.0F, jumpColor.hashCode());
+            this.textRenderer.draw(matrices, "" + jumpStrength, 93.0F + spacer, 36.0F, jumpColor.hashCode());
             this.textRenderer.draw(matrices, "♥", 83.0F + spacer, 46.0F, hearthColor.hashCode());
             this.textRenderer.draw(matrices, "" + maxHealth, 93.0F + spacer, 46.0F, hearthColor.hashCode());
 
         } else {
             this.textRenderer.draw(matrices, "➟ " + speed, 80.0F, 6.0F, speedColor.hashCode());
-            this.textRenderer.draw(matrices, "⇮ " + jumpstrength, 115.0F, 6.0F, jumpColor.hashCode());
+            this.textRenderer.draw(matrices, "⇮ " + jumpStrength, 115.0F, 6.0F, jumpColor.hashCode());
             this.textRenderer.draw(matrices, "♥ " + maxHealth, 140.0F, 6.0F, hearthColor.hashCode());
         }
 

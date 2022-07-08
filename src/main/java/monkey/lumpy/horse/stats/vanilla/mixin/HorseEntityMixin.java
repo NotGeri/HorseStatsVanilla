@@ -1,6 +1,7 @@
 package monkey.lumpy.horse.stats.vanilla.mixin;
 
 import me.shedaniel.autoconfig.AutoConfig;
+import monkey.lumpy.horse.stats.vanilla.HorseStatsVanilla;
 import monkey.lumpy.horse.stats.vanilla.config.ModConfig;
 import monkey.lumpy.horse.stats.vanilla.gui.ToolTipGui;
 import monkey.lumpy.horse.stats.vanilla.gui.Tooltip;
@@ -10,10 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.HorseEntity;
-import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -22,35 +20,33 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-
 @Mixin(HorseEntity.class)
 public abstract class HorseEntityMixin extends AbstractHorseEntity {
 
-    private ModConfig config;
+    private final ModConfig config;
 
     protected HorseEntityMixin(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
+        this.config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
     }
 
     @Inject(at = @At("HEAD"), method = "interactMob")
     public void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> ret) {
-        if (config == null) config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-
         if (this.world.isClient && !this.isTame() && player.shouldCancelInteraction() && (config == null || config.isTooltipEnabled())) {
 
+            // Get stat values
+            double jumpStrength = Converter.jumpStrengthToJumpHeight(this.getJumpStrength());
+            double maxHealth = this.getMaxHealth();
+            double speed = Converter.genericSpeedToBlocPerSec(this.getAttributes().getValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+
             // Show tooltip
-            DecimalFormat df = new DecimalFormat("#.#");
-            String jumpstrength = df.format(Converter.jumpStrengthToJumpHeight(this.getJumpStrength()));
-            String maxHealth = df.format(this.getMaxHealth());
-            String speed = df.format(Converter.genericSpeedToBlocPerSec(this.getAttributes().getValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)));
-
-            double jumpValue = new BigDecimal(jumpstrength.replace(',', '.')).doubleValue();
-            double speedValue = new BigDecimal(speed.replace(',', '.')).doubleValue();
-            double healthValue = new BigDecimal(maxHealth.replace(',', '.')).doubleValue();
-
-            MinecraftClient.getInstance().setScreen(new ToolTipGui(new Tooltip(speedValue, jumpValue, healthValue)));
+            MinecraftClient.getInstance().setScreen(new ToolTipGui(new Tooltip(
+                    HorseStatsVanilla.formatValue(speed),
+                    HorseStatsVanilla.formatValue(jumpStrength),
+                    HorseStatsVanilla.formatValue(maxHealth)))
+            );
         }
     }
+
+
 }

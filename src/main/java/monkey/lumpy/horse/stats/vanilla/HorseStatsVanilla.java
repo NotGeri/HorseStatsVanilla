@@ -12,4 +12,15 @@ public class HorseStatsVanilla implements ModInitializer {
         AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
     }
 
+    /**
+     * Format a {@link double} value
+     *
+     * @param value The value to format
+     * @return The formatted value
+     */
+    public static double formatValue(double value) {
+        String stringValue = decimalFormat.format(value);
+        return new BigDecimal(stringValue.replace(',', '.')).doubleValue();
+    }
+
 }
