@@ -12,6 +12,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -32,6 +33,7 @@ public abstract class HorseEntityMixin extends AbstractHorseEntity {
 
     @Inject(at = @At("HEAD"), method = "interactMob")
     public void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> ret) {
+
         if (this.world.isClient && !this.isTame() && player.shouldCancelInteraction() && (config == null || config.isTooltipEnabled())) {
 
             // Get stat values
@@ -46,7 +48,7 @@ public abstract class HorseEntityMixin extends AbstractHorseEntity {
                     HorseStatsVanilla.formatValue(maxHealth)))
             );
         }
-    }
 
+    }
 
 }

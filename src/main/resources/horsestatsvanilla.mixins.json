@@ -4,9 +4,10 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [],
   "client": [
-    "HorseScreenMixin",
+    "AbstractDonkeyEntityMixin",
     "HorseEntityMixin",
-    "AbstractDonkeyEntityMixin"
+    "HorseScreenMixin",
+    "JoinWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

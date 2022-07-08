@@ -8,7 +8,8 @@ import me.shedaniel.math.Color;
 
 @Config(name = "horsestatsvanilla")
 public class ModConfig implements ConfigData {
-    static class ColorObj {
+
+    public static class ColorObj {
         public ColorObj(int red, int green, int blue) {
             this.red = red;
             this.green = green;
@@ -122,4 +123,6 @@ public class ModConfig implements ConfigData {
     public Color getBadColor() {
         return badColor.getColor();
     }
+
+
 }

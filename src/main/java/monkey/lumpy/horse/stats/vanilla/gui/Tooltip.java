@@ -12,12 +12,10 @@ import net.minecraft.text.Text;
 
 public class Tooltip extends LightweightGuiDescription {
 
-    private final ModConfig config;
-
     public Tooltip(double speed, double jump, double health) {
         super();
 
-        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
         WBox root = new WBox(Axis.VERTICAL);
         setRootPanel(root);
         root.setSpacing(-8);
@@ -76,6 +74,6 @@ public class Tooltip extends LightweightGuiDescription {
         root.add(jumpBox);
         root.add(healthBox);
         root.validate(this);
-
     }
+
 }

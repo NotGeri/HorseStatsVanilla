@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
   "id": "horsestatsvanilla",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "name": "Horse Stats Vanilla",
-  "description": "Shows horse stats in the horse inventory.",
+  "description": "Shows horse stats in the horse inventory and in the world",
   "authors": [
-    "lumpyMonkey"
+    "lumpyMonkey",
+    "Geri"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/horsestatsvanilla",
@@ -18,7 +19,9 @@
     "main": [
       "monkey.lumpy.horse.stats.vanilla.HorseStatsVanilla"
     ],
-    "modmenu": [ "monkey.lumpy.horse.stats.vanilla.ModMenuApiImpl" ] 
+    "modmenu": [
+      "monkey.lumpy.horse.stats.vanilla.ModMenuApiImpl"
+    ]
   },
   "mixins": [
     "horsestatsvanilla.mixins.json"
@@ -31,5 +34,7 @@
   "suggests": {
     "flamingo": "*"
   },
-  "custom": { "modmenu:clientsideOnly": true }
+  "custom": {
+    "modmenu:clientsideOnly": true
+  }
 }
