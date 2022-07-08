@@ -2,6 +2,9 @@ package monkey.lumpy.horse.stats.vanilla.gui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
+import org.lwjgl.glfw.GLFW;
 
 public class ToolTipGui extends CottonClientScreen {
 
@@ -10,19 +13,17 @@ public class ToolTipGui extends CottonClientScreen {
     }
 
     @Override
-    public boolean keyPressed(int ch, int keyCode, int modifiers) {
-        if(keyCode == 26) {
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+
+        KeyBinding key = MinecraftClient.getInstance().options.inventoryKey;
+
+        // Close if inventory is pressed
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE || key.matchesKey(keyCode, scanCode)) {
             close();
+            return true;
         }
-        return super.keyPressed(ch, keyCode, modifiers);
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    @Override
-    public boolean keyReleased(int ch, int keyCode, int modifiers) {
-        if(keyCode == 50) {
-            close();
-        }
-        return super.keyReleased(ch, keyCode, modifiers);
-    }
-    
 }
