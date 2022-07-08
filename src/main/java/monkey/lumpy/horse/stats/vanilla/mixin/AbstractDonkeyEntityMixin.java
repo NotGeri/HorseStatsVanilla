@@ -35,6 +35,9 @@ public class AbstractDonkeyEntityMixin extends AbstractHorseEntity {
 
         if (this.world.isClient && !this.isTame() && player.shouldCancelInteraction() && (config == null || config.isTooltipEnabled())) {
 
+            // Check for hand items
+            for (ItemStack item : player.getItemsHand()) if (!item.isEmpty()) return;
+
             // Get stat values
             double jumpStrength = Converter.jumpStrengthToJumpHeight(this.getJumpStrength());
             double maxHealth = this.getMaxHealth();
