@@ -34,10 +34,10 @@ public abstract class HorseEntityMixin extends AbstractHorseEntity {
     @Inject(at = @At("HEAD"), method = "interactMob")
     public void interactMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> ret) {
 
-        if (this.world.isClient && !this.isTame() && player.shouldCancelInteraction() && (config == null || config.isTooltipEnabled())) {
+        if (this.getWorld().isClient && !this.isTame() && player.shouldCancelInteraction() && (config == null || config.isTooltipEnabled())) {
 
             // Check for hand items
-            for (ItemStack item : player.getItemsHand()) if (!item.isEmpty()) return;
+            for (ItemStack item : player.getHandItems()) if (!item.isEmpty()) return;
 
             // Get stat values
             double jumpStrength = Converter.jumpStrengthToJumpHeight(this.getJumpStrength());
